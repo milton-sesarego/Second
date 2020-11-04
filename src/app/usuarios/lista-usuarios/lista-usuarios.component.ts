@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuarios } from '../../models/Usuarios';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -10,7 +12,11 @@ import { UsuariosService } from '../../services/usuarios.service';
 export class ListaUsuariosComponent implements OnInit {
   usuarios: Usuarios[];
   idUsuario: number;
-  constructor(private _usuariosService: UsuariosService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private _usuariosService: UsuariosService
+  ) {}
 
   ngOnInit(): void {
     this.obtenerUsuarios();
@@ -25,6 +31,14 @@ export class ListaUsuariosComponent implements OnInit {
       console.log(data);
       this.obtenerUsuarios();
       // this.toast.success("Usuario eliminado");
+    });
+  }
+
+  editarUsuario(userId: Number) {
+    console.log(userId);
+    this.router.navigate(['../alta-usuarios'], {
+      queryParams: { id: userId },
+      relativeTo: this.route,
     });
   }
 }

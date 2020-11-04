@@ -1,6 +1,56 @@
-<li class="nav-item">
-  <a class="nav-link" routerLink="/usuarios/lista-usuarios">Lista Usuarios</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" routerLink="/usuarios/alta-usuarios">Nuevo Usuario</a>
-</li>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Second APP</a>
+
+  <button
+    class="navbar-toggler navbar-toggler-right"
+    type="button"
+    aria-controls="appNavigation"
+    aria-expanded="!isCollapsed"
+    aria-label="Toggle navigation"
+    (click)="toggleMenu()"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse"
+    id="appNavigation"
+    [ngbCollapse]="isCollapsed"
+  >
+    <div class="navbar-nav mr-auto">
+      <a
+        (click)="toggleMenu()"
+        class="nav-item nav-link"
+        routerLink=""
+        routerLinkActive="active"
+        >Home</a
+      >
+
+      <div class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="dropdownSede" ngbDropdownToggle
+          >Usuarios</a
+        >
+        <div
+          class="dropdown-menu"
+          ngbDropdownMenu
+          aria-labelledby="dropdownSede"
+        >
+          <a
+            class="dropdown-item"
+            routerLink="/usuarios/lista-usuarios"
+            routerLinkActive="active"
+            (click)="toggleMenu()"
+            >Lista</a
+          >
+          <a
+            class="dropdown-item"
+            routerLink="/usuarios/alta-usuarios"
+            routerLinkActive="active"
+            (click)="toggleMenu()"
+            >Agregar</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

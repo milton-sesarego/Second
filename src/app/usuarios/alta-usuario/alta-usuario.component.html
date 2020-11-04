@@ -1,3 +1,10 @@
+<div *ngIf="!editando; else actualizarBlock">
+  <h4>Agregar nuevo usuario</h4>
+</div>
+<ng-template #actualizarBlock>
+  <h4>Actualizar usuario existente</h4>
+</ng-template>
+
 <form [formGroup]="usuarioForm">
   <div class="form-group">
     <label for="Nombre">Nombre</label>
@@ -72,7 +79,7 @@
     >
       Actualizar
     </button>
-    <button type="submit" class="btn btn-danger" (click)="limpiarCampos()">
+    <button type="submit" class="btn btn-danger" (click)="cancelar()">
       Cancelar
     </button></ng-template
   >

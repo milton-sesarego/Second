@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
 import { AltaUsuarioComponent } from './usuarios/alta-usuario/alta-usuario.component';
 import { UsuariosService } from './services/usuarios.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UsuariosService } from './services/usuarios.service';
     RouterModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [UsuariosService],
   bootstrap: [AppComponent],

@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuarios } from '../../models/Usuarios';
 import { UsuariosService } from '../../services/usuarios.service';
 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-alta-usuario',
   templateUrl: './alta-usuario.component.html',
@@ -12,16 +15,35 @@ export class AltaUsuarioComponent implements OnInit {
   usuarioForm: FormGroup;
   editando = false;
   idUsuario: number;
+  usuario$: Observable<Usuarios>;
+  usuario: Usuarios;
 
   constructor(
     // private toast: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute,
     private _usuariosService: UsuariosService,
     private fb: FormBuilder
   ) {
-    this.limpiarCampos();
+    router.events.subscribe((val) => {
+      this.ngOnInit();
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.idUsuario = params['id'];
+    });
+    if (this.idUsuario) {
+      this.usuario$ = this._usuariosService.obtenerUsuarioPorID(this.idUsuario);
+      this.usuario$.subscribe((user) => {
+        this.usuario = user;
+        this.editarUsuario(this.usuario);
+      });
+    } else {
+      this.limpiarCampos();
+    }
+  }
 
   crearUsuario() {
     var formNombreUsuario = this.usuarioForm.get('nombreUsuario').value;
@@ -92,5 +114,11 @@ export class AltaUsuarioComponent implements OnInit {
       nombreUsuario: ['', Validators.required],
     });
     this.editando = false;
+  }
+
+  cancelar() {
+    this.router.navigate(['../lista-usuarios'], {
+      relativeTo: this.route,
+    });
   }
 }
