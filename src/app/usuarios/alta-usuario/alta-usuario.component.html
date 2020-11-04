@@ -1,0 +1,79 @@
+<form [formGroup]="usuarioForm">
+  <div class="form-group">
+    <label for="Nombre">Nombre</label>
+    <input
+      type="text"
+      class="form-control"
+      id="Nombre"
+      formControlName="nombre"
+    />
+    <div
+      *ngIf="
+        usuarioForm.get('nombre').hasError('required') &&
+        usuarioForm.get('nombre').touched
+      "
+      class="mda-form-msg"
+    >
+      <small>Este campo es requerido</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Apellido">Apellido</label>
+    <input
+      type="text"
+      class="form-control"
+      id="Apellido"
+      formControlName="apellido"
+    />
+    <div
+      *ngIf="
+        usuarioForm.get('apellido').hasError('required') &&
+        usuarioForm.get('apellido').touched
+      "
+      class="mda-form-msg"
+    >
+      <small>Este campo es requerido</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Usuario">Usuario</label>
+    <input
+      type="text"
+      class="form-control"
+      id="Usuario"
+      formControlName="nombreUsuario"
+    />
+    <div
+      *ngIf="
+        usuarioForm.get('nombreUsuario').hasError('required') &&
+        usuarioForm.get('nombreUsuario').touched
+      "
+      class="mda-form-msg"
+    >
+      <small>Este campo es requerido</small>
+    </div>
+  </div>
+  <div *ngIf="!editando; else editarBlock">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="crearUsuario()"
+      [disabled]="usuarioForm.invalid"
+    >
+      Agregar
+    </button>
+  </div>
+  <ng-template #editarBlock
+    ><button
+      type="submit"
+      class="btn btn-primary mr-3"
+      (click)="actualizarUsuario()"
+      [disabled]="usuarioForm.invalid"
+    >
+      Actualizar
+    </button>
+    <button type="submit" class="btn btn-danger" (click)="limpiarCampos()">
+      Cancelar
+    </button></ng-template
+  >
+</form>

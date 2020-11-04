@@ -1,0 +1,41 @@
+<p *ngIf="!usuarios"><em>No se encuentran usuarios para mostrar</em></p>
+
+<table
+  class="table table-striped mt-4"
+  aria-labelledby="tableLabel"
+  *ngIf="usuarios"
+>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Usuario</th>
+      <th>Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.id }}</td>
+      <td>{{ usuario.nombre }}</td>
+      <td>{{ usuario.apellido }}</td>
+      <td>{{ usuario.nombreUsuario }}</td>
+      <td>
+        <button
+          type="submit"
+          class="btn btn-secondary mr-3"
+          (click)="editarUsuario(usuario)"
+        >
+          Editar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-danger"
+          (click)="eliminarUsuario(usuario.id)"
+        >
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
